@@ -1,7 +1,7 @@
 
 from googleapiclient.discovery import build
   
-api_key = 'AIzaSyA19IRCSN0VimVkK_9tEBRL2kqMxTQrzt0'
+api_key = 'Your API KEY'
 import re
 import pandas as pd
 csv = pd.read_csv('Book1.csv')
