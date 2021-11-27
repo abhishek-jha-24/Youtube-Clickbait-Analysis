@@ -1,42 +1,21 @@
 
 from googleapiclient.discovery import build
   
-api_key = 'Your API KEY'
+api_key = 'AIzaSyB8RLyfOy62Y33JKvcDoVRARQYXu7-DH5k'
 import re
 import pandas as pd
-csv = pd.read_csv('Book1.csv')
+csv = pd.read_csv('real.csv')
 
 
 name = 1
 
-file = open("temp.txt", "w") 
+file = open("bfd.txt", "w", encoding="utf-8") 
 
 from html import unescape
 import re, string, unicodedata
 
 import urllib.parse as urlparse
 
-def video_id(value):
-    """
-    Examples:
-    - http://youtu.be/SA2iWivDJiE
-    - http://www.youtube.com/watch?v=_oPAwA_Udwc&feature=feedu
-    - http://www.youtube.com/embed/SA2iWivDJiE
-    - http://www.youtube.com/v/SA2iWivDJiE?version=3&amp;hl=en_US
-    """
-    query = urlparse.urlparse(value)
-    if query.hostname == 'youtu.be':
-        return query.path[1:]
-    if query.hostname in ('www.youtube.com', 'youtube.com'):
-        if query.path == '/watch':
-            p = urlparse.parse_qs(query.query)
-            return p['v'][0]
-        if query.path[:7] == '/embed/':
-            return query.path.split('/')[2]
-        if query.path[:3] == '/v/':
-            return query.path.split('/')[2]
-    # fail?
-    return None
 
 def remove_URL(sample):
     """Remove URLs from a sample string"""
@@ -128,11 +107,11 @@ def video_comments(url, category):
 count = 0
 temp = 0
 for index, row in csv.iterrows():
-    s = video_id(row[0])
+    
     temp+=1
     print("Ith -> ", temp)
     try:
-        video_comments(s, row[1])
+        video_comments(row[0], row[1])
     except Exception as e:
         count += 1
         print(e)
